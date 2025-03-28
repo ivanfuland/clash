@@ -1,4 +1,0 @@
-DOMAIN-SUFFIX,huggingface.co
-DOMAIN,cdn-lfs.huggingface.co
-DOMAIN,hub.huggingface.co
-DOMAIN,api-inference.huggingface.co
