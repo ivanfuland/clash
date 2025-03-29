@@ -162,7 +162,7 @@ function operator(pro) {
         !(clear && nameclear.test(resname)) &&
         !(nx && namenx.test(resname)) &&
         !(blnx && !nameblnx.test(resname)) &&
-        !(key && !(keya.test(resname) && /2|4|6|7/i.test(resname)));
+        !(key && !keya.test(resname));
       return shouldKeep;
     });
   }
