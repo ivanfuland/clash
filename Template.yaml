@@ -4,3 +4,111 @@ allow-lan: true
 mode: rule
 log-level: info
 external-controller: 0.0.0.0:9090
+
+rule-providers:
+  🤖 AI:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/ArtificialIntelligence.list
+    interval: 86400
+    path: ./ruleset/ai.yaml
+
+  ☁️ Amazon:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Amazon/Amazon.list
+    interval: 86400
+    path: ./ruleset/amazon.yaml
+
+  💻 GitHub:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.list
+    interval: 86400
+    path: ./ruleset/github.yaml
+
+  🐦 社交1:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.list
+    interval: 86400
+    path: ./ruleset/twitter.yaml
+
+  🐦 社交2:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Facebook.list
+    interval: 86400
+    path: ./ruleset/facebook.yaml
+
+  📺 流媒体_YouTube:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.list
+    interval: 86400
+    path: ./ruleset/youtube.yaml
+
+  📺 流媒体_HBO:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/HBO/HBO.list
+    interval: 86400
+    path: ./ruleset/hbo.yaml
+
+  📺 流媒体_Disney:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.list
+    interval: 86400
+    path: ./ruleset/disney.yaml
+
+  📺 流媒体_Netflix:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.list
+    interval: 86400
+    path: ./ruleset/netflix.yaml
+
+  📺 流媒体_Spotify:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.list
+    interval: 86400
+    path: ./ruleset/spotify.yaml
+
+  🌐 国外1:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Check.list
+    interval: 86400
+    path: ./ruleset/check.yaml
+
+  🌐 国外2:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Proxy.list
+    interval: 86400
+    path: ./ruleset/proxy.yaml
+
+  🌐 国外3:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list
+    interval: 86400
+    path: ./ruleset/global.yaml
+
+rules:
+  - RULE-SET,🤖 AI,🤖 AI
+  - RULE-SET,☁️ Amazon,☁️ Amazon
+  - RULE-SET,💻 GitHub,💻 GitHub
+  - RULE-SET,🐦 社交1,🐦 社交
+  - RULE-SET,🐦 社交2,🐦 社交
+  - RULE-SET,📺 流媒体_YouTube,📺 流媒体
+  - RULE-SET,📺 流媒体_HBO,📺 流媒体
+  - RULE-SET,📺 流媒体_Disney,📺 流媒体
+  - RULE-SET,📺 流媒体_Netflix,📺 流媒体
+  - RULE-SET,📺 流媒体_Spotify,📺 流媒体
+  - RULE-SET,🌐 国外1,🌐 国外
+  - RULE-SET,🌐 国外2,🌐 国外
+  - RULE-SET,🌐 国外3,🌐 国外
+  - FINAL,🏠 国内
