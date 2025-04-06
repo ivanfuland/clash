@@ -5,6 +5,9 @@ IP-CIDR,104.236.69.0/24,no-resolve
 IP-CIDR,95.161.76.0/24,no-resolve
 IP-CIDR,142.251.215.0/24,no-resolve
 
+# ivan
+DOMAIN-SUFFIX,judyplan.com
+
 # 国外DNS
 DOMAIN-SUFFIX,dns.google
 DOMAIN-SUFFIX,1dot1dot1dot1.cloudflare-dns.com
