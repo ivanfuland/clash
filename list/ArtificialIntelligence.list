@@ -1,7 +1,22 @@
+DOMAIN,ai.google.dev
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,browser-intake-datadoghq.com
+DOMAIN,chat.openai.com.cdn.cloudflare.net
+DOMAIN,gemini.google.com
+DOMAIN,makersuite.google.com
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+DOMAIN,openaicomproductionae4b.blob.core.windows.net
+DOMAIN,production-openaicom-storage.azureedge.net
+DOMAIN,static.cloudflareinsights.com
+DOMAIN-SUFFIX,ai.com
 DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,algolia.net
 DOMAIN-SUFFIX,alkalicore-pa.clients6.google.com
 DOMAIN-SUFFIX,alkalimakersuite-pa.clients6.google.com
 DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,api.statsig.com
+DOMAIN-SUFFIX,apis.google.com
 DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,bing.com
@@ -44,6 +59,7 @@ DOMAIN-SUFFIX,identrust.com
 DOMAIN-SUFFIX,intercom.io
 DOMAIN-SUFFIX,intercomcdn.com
 DOMAIN-SUFFIX,jasper.ai
+DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,makersuite.google.com
 DOMAIN-SUFFIX,meta.ai
 DOMAIN-SUFFIX,metademolab.com
@@ -52,6 +68,7 @@ DOMAIN-SUFFIX,notebooklm.google
 DOMAIN-SUFFIX,notebooklm.google.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,observeit.net
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
 DOMAIN-SUFFIX,openaiapi-site.azureedge.net
@@ -67,6 +84,7 @@ DOMAIN-SUFFIX,pplx-res.cloudinary.com
 DOMAIN-SUFFIX,pplx.ai
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,production-openaicom-storage.azureedge.net
+DOMAIN-SUFFIX,segment.io
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,signalr.net
 DOMAIN-SUFFIX,sora.com
@@ -74,3 +92,10 @@ DOMAIN-SUFFIX,stripe.com
 DOMAIN-SUFFIX,turn.livekit.cloud
 DOMAIN-SUFFIX,vulpes.one
 DOMAIN-SUFFIX,x.ai
+DOMAIN-KEYWORD,colab
+DOMAIN-KEYWORD,developerprofiles
+DOMAIN-KEYWORD,generativelanguage
+DOMAIN-KEYWORD,openai
+IP-CIDR,24.199.123.28/32,no-resolve
+IP-CIDR,64.23.132.171/32,no-resolve
+IP-ASN,20473,no-resolve
