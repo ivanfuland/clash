@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "type": "field",
+      "outboundTag": "proxy",
+      "domain": [
+        "geosite:github",
+        "geosite:gitlab",
+        "geosite:docker",
+        "geosite:npm",
+        "geisite:google",
+        "geosite:microsoft",
+        "geosite:youtube",
+        "geosite:netflix",
+        "geosite:telegram",
+        "geosite:twitter"
+      ]
+    },
+    {
+      "type": "remote-rule-set",
+      "tag": "AI",
+      "format": "list",
+      "url": "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/ArtificialIntelligence.list",
+      "outboundTag": "proxy"
+    },
+    {
+      "type": "remote-rule-set",
+      "tag": "Diagnostics",
+      "format": "list",
+      "url": "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Diagnostics.list",
+      "outboundTag": "proxy"
+    },
+    {
+      "type": "field",
+      "outboundTag": "direct"
+    }
+  ]
+}
