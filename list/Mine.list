@@ -7,7 +7,7 @@ DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,pplx.ai
 
 # OpenRouter
-DOMAIN-SUFFIX,openrouter.ai
+# DOMAIN-SUFFIX,openrouter.ai
 
 # 其他
 DOMAIN-SUFFIX,fal.ai
