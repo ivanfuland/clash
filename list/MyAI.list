@@ -27,6 +27,9 @@ DOMAIN-SUFFIX,claudeusercontent.com
 DOMAIN-SUFFIX,claudemcpclient.com
 # CDN
 DOMAIN,servd-anthropic-website.b-cdn.net
+# Claude Code telemetry & error reporting
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,statsig.com
 
 ##### Gemini #####
 # DeepMind
