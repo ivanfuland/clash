@@ -9,11 +9,34 @@ DOMAIN-SUFFIX,claudemcpclient.com
 
 # CDN
 DOMAIN,servd-anthropic-website.b-cdn.net
+DOMAIN,cdn.usefathom.com
 
-# Claude Code: telemetry & feature flags
+# Claude Code: telemetry / feature flags / analytics
 DOMAIN-SUFFIX,statsig.com
 DOMAIN-SUFFIX,statsig.anthropic.com
+DOMAIN-SUFFIX,statsigapi.net
 DOMAIN-SUFFIX,datadoghq.com
+DOMAIN-SUFFIX,browser-intake-datadoghq.com
 
-# Claude Code: error reporting
+# Error reporting
 DOMAIN-SUFFIX,sentry.io
+
+# Anthropic-related keyword fallback
+DOMAIN-KEYWORD,claude
+DOMAIN-KEYWORD,anthropic
+
+# Payment / billing / support
+DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,invoice.stripe.com
+DOMAIN-SUFFIX,paypal.com
+DOMAIN-SUFFIX,intercom.io
+
+# Related / compatibility services
+DOMAIN-SUFFIX,forefront.ai
+DOMAIN,bedrock-runtime.us-east-1.amazonaws.com
+DOMAIN,bedrock.us-east-1.amazonaws.com
+
+# Payment
+DOMAIN-SUFFIX,stripe.network
+DOMAIN-SUFFIX,stripecdn.com
+DOMAIN-SUFFIX,stripe.dev
