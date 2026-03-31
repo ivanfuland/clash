@@ -1,14 +1,19 @@
 ##### Anthropic / Claude Code #####
+
 # Main Domain
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claudeusercontent.com
 DOMAIN-SUFFIX,claudemcpclient.com
+
 # CDN
 DOMAIN,servd-anthropic-website.b-cdn.net
+
 # Claude Code: telemetry & feature flags
 DOMAIN-SUFFIX,statsig.com
 DOMAIN-SUFFIX,statsig.anthropic.com
+DOMAIN-SUFFIX,datadoghq.com
+
 # Claude Code: error reporting
 DOMAIN-SUFFIX,sentry.io
