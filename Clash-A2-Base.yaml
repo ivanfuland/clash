@@ -44,6 +44,7 @@ rule-providers:
     interval: 86400
 
 rules:
+  - GEOSITE,category-ads,REJECT
   - RULE-SET,MyAnthropic,👽 Anthropic
   - GEOSITE,anthropic,👽 Anthropic
   - RULE-SET,MyOpenAI,🤖 OpenAI
