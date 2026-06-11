@@ -22,6 +22,7 @@ rule-providers:
   MyAnthropic:
     type: http
     behavior: classical
+    format: text
     url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyAnthropic.list
     path: ./providers/MyAnthropic.yaml
     interval: 86400
@@ -29,6 +30,7 @@ rule-providers:
   MyOpenAI:
     type: http
     behavior: classical
+    format: text
     url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyOpenAI.list
     path: ./providers/MyOpenAI.yaml
     interval: 86400
@@ -36,6 +38,7 @@ rule-providers:
   Mine1:
     type: http
     behavior: classical
+    format: text
     url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Mine1.list
     path: ./providers/Mine1.yaml
     interval: 86400
