@@ -10,9 +10,40 @@ export default {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    const target = "http://converter.judyplan.com:25500/sub?target=clash&url=http%3A%2F%2Fconverter.judyplan.com%3A3001%2FT3B9dgzBzdRbF8Aqx7P%2Fdownload%2Fcollection%2Faggressive&config=https%3A%2F%2Fraw.githubusercontent.com%2Fivanfuland%2Fclash%2Frefs%2Fheads%2Fmain%2FClash-A2.ini&scv=true&udp=true&new_name=true";
+    const configMap = {
+      a1: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A1.ini",
+      a2: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A2.ini",
+    };
 
-    const response = await fetch(target, {
+    const rawConfig =
+      url.searchParams.get("config") ||
+      url.searchParams.get("profile") ||
+      url.searchParams.get("rule") ||
+      (url.searchParams.has("a1") ? "a1" : "") ||
+      (url.searchParams.has("a2") ? "a2" : "") ||
+      "a2";
+
+    const configName = rawConfig
+      .toLowerCase()
+      .replace(/^clash-/, "")
+      .replace(/\.ini$/, "");
+
+    if (!configMap[configName]) {
+      return new Response("Bad Request: config must be A1 or A2", { status: 400 });
+    }
+
+    const target = new URL("http://converter.judyplan.com:25500/sub");
+    target.searchParams.set("target", "clash");
+    target.searchParams.set(
+      "url",
+      "http://converter.judyplan.com:3001/T3B9dgzBzdRbF8Aqx7P/download/collection/aggressive"
+    );
+    target.searchParams.set("config", configMap[configName]);
+    target.searchParams.set("scv", "true");
+    target.searchParams.set("udp", "true");
+    target.searchParams.set("new_name", "true");
+
+    const response = await fetch(target.toString(), {
       method: "GET",
       headers: {
         "User-Agent": request.headers.get("User-Agent") || "",
@@ -26,6 +57,7 @@ export default {
     newHeaders.set("Access-Control-Allow-Origin", "*");
     newHeaders.set("Cache-Control", "no-store");
     newHeaders.set("Content-Type", "application/x-yaml; charset=utf-8");
+    newHeaders.set("X-Sub-Config", configName.toUpperCase());
     newHeaders.set(
       "Content-Disposition",
       "inline; filename*=UTF-8''%E8%81%9A%E5%90%88%E4%BC%98%E9%80%89CF%E7%89%88"
