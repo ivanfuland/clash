@@ -45,7 +45,6 @@ rules:
   - GEOSITE,npmjs,💻 编程
   - GEOSITE,python,💻 编程
   - GEOSITE,twitter,🐦 社交
-  - GEOSITE,telegram,🐦 社交
   - GEOSITE,instagram,🐦 社交
   - GEOSITE,facebook,🥽 Meta
   - GEOSITE,youtube,📺 Youtube
@@ -55,5 +54,4 @@ rules:
   - RULE-SET,Mine1,🌐 国外
   - GEOSITE,geolocation-!cn,🌐 国外
   - GEOIP,!CN,🌐 国外,no-resolve
-  - GEOIP,CN,🏠 国内,no-resolve
   - MATCH,🏠 国内
