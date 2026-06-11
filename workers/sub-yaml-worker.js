@@ -1,13 +1,65 @@
-export default {
-  async fetch(request) {
-    const url = new URL(request.url);
+const WORKER_VERSION = "2026-06-11-a1-a2-cache";
+const CACHE_TTL_SECONDS = 3600;
 
-    const workerVersion = "2026-06-11-a1-a2";
+function normalizeConfig(text) {
+  if (/^external-controller:.*$/m.test(text)) {
+    return text.replace(
+      /^external-controller:.*$/m,
+      "external-controller: 0.0.0.0:9090"
+    );
+  }
+
+  return `external-controller: 0.0.0.0:9090\n${text}`;
+}
+
+function isValidSubscription(text) {
+  return (
+    text &&
+    text.length > 1000 &&
+    /^proxies:\s*$/m.test(text) &&
+    /^proxy-groups:\s*$/m.test(text) &&
+    /^rules:\s*$/m.test(text)
+  );
+}
+
+function buildHeaders(sourceHeaders, configName, cacheStatus) {
+  const headers = new Headers();
+  headers.set("Access-Control-Allow-Origin", "*");
+  headers.set("Cache-Control", "no-store");
+  headers.set("Content-Type", "application/x-yaml; charset=utf-8");
+  headers.set("X-Sub-Config", configName.toUpperCase());
+  headers.set("X-Worker-Version", WORKER_VERSION);
+  headers.set("X-Sub-Cache", cacheStatus);
+  headers.set(
+    "Content-Disposition",
+    "inline; filename*=UTF-8''%E8%81%9A%E5%90%88%E4%BC%98%E9%80%89CF%E7%89%88"
+  );
+
+  const userInfo = sourceHeaders?.get("subscription-userinfo");
+  if (userInfo) {
+    headers.set("subscription-userinfo", userInfo);
+  }
+
+  return headers;
+}
+
+function staleResponse(cached, configName) {
+  const headers = new Headers(cached.headers);
+  headers.set("Cache-Control", "no-store");
+  headers.set("X-Sub-Config", configName.toUpperCase());
+  headers.set("X-Worker-Version", WORKER_VERSION);
+  headers.set("X-Sub-Cache", "STALE");
+  return new Response(cached.body, { status: 200, headers });
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
 
     if (url.pathname === "/_version") {
       return Response.json({
         name: "clash-sub",
-        version: workerVersion,
+        version: WORKER_VERSION,
       });
     }
 
@@ -52,35 +104,46 @@ export default {
     target.searchParams.set("udp", "true");
     target.searchParams.set("new_name", "true");
 
-    const response = await fetch(target.toString(), {
-      method: "GET",
-      headers: {
-        "User-Agent": request.headers.get("User-Agent") || "",
-      },
-    });
+    const cache = caches.default;
+    const cacheKey = new Request(`${url.origin}${url.pathname}?config=${configName}`);
+    const cached = await cache.match(cacheKey);
 
-    let text = await response.text();
-    text = text.replace(/external-controller: .*/, "external-controller: 0.0.0.0:9090");
-
-    const newHeaders = new Headers(response.headers);
-    newHeaders.set("Access-Control-Allow-Origin", "*");
-    newHeaders.set("Cache-Control", "no-store");
-    newHeaders.set("Content-Type", "application/x-yaml; charset=utf-8");
-    newHeaders.set("X-Sub-Config", configName.toUpperCase());
-    newHeaders.set("X-Worker-Version", workerVersion);
-    newHeaders.set(
-      "Content-Disposition",
-      "inline; filename*=UTF-8''%E8%81%9A%E5%90%88%E4%BC%98%E9%80%89CF%E7%89%88"
-    );
-
-    const userInfo = response.headers.get("subscription-userinfo");
-    if (userInfo) {
-      newHeaders.set("subscription-userinfo", userInfo);
+    let response;
+    try {
+      response = await fetch(target.toString(), {
+        method: "GET",
+        headers: {
+          "User-Agent": request.headers.get("User-Agent") || "",
+        },
+      });
+    } catch (error) {
+      if (cached) return staleResponse(cached, configName);
+      return new Response(`Upstream fetch failed: ${error.message}`, { status: 502 });
     }
 
-    return new Response(text, {
-      status: response.status,
-      headers: newHeaders,
+    const text = normalizeConfig(await response.text());
+
+    if (!response.ok || !isValidSubscription(text)) {
+      if (cached) return staleResponse(cached, configName);
+      return new Response("Upstream returned invalid subscription", { status: 502 });
+    }
+
+    const headers = buildHeaders(response.headers, configName, "MISS");
+    const cacheHeaders = new Headers(headers);
+    cacheHeaders.set("Cache-Control", `public, max-age=${CACHE_TTL_SECONDS}`);
+    cacheHeaders.set("X-Sub-Cache", "HIT");
+
+    const cacheResponse = new Response(text, {
+      status: 200,
+      headers: cacheHeaders,
     });
+
+    if (ctx?.waitUntil) {
+      ctx.waitUntil(cache.put(cacheKey, cacheResponse.clone()));
+    } else {
+      await cache.put(cacheKey, cacheResponse.clone());
+    }
+
+    return new Response(text, { status: 200, headers });
   },
 };
