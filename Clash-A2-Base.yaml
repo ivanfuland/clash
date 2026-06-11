@@ -18,7 +18,32 @@ geox-url:
 proxies: ~
 proxy-groups: ~
 
+rule-providers:
+  MyAnthropic:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyAnthropic.list
+    path: ./providers/MyAnthropic.yaml
+    interval: 86400
+
+  MyOpenAI:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyOpenAI.list
+    path: ./providers/MyOpenAI.yaml
+    interval: 86400
+
+  Mine1:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Mine1.list
+    path: ./providers/Mine1.yaml
+    interval: 86400
+
 rules:
+  - RULE-SET,MyAnthropic,👽 Anthropic
+  - RULE-SET,MyOpenAI,🤖 OpenAI
+  - RULE-SET,Mine1,🌐 国外
   - GEOSITE,anthropic,👽 Anthropic
   - GEOSITE,openai,🤖 OpenAI
   - GEOSITE,category-ai-!cn,🤖 OpenAI
@@ -34,7 +59,6 @@ rules:
   - GEOSITE,netflix,🎬 Netflix
   - GEOSITE,google,🔍 Google
   - GEOSITE,microsoft,📄 Microsoft
-  - GEOSITE,cn,🏠 国内
   - GEOSITE,geolocation-!cn,🌐 国外
   - GEOIP,CN,🏠 国内,no-resolve
-  - MATCH,🌐 国外
+  - MATCH,🏠 国内
