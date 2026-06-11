@@ -1,0 +1,4 @@
+name = "clash-sub"
+main = "workers/sub-yaml-worker.js"
+compatibility_date = "2026-06-11"
+workers_dev = false
