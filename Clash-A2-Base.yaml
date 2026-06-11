@@ -54,6 +54,8 @@ rules:
   - GEOSITE,npmjs,💻 编程
   - GEOSITE,python,💻 编程
   - GEOSITE,twitter,🐦 社交
+  - GEOSITE,telegram,🐦 社交
+  - GEOIP,telegram,🐦 社交,no-resolve
   - GEOSITE,instagram,🐦 社交
   - GEOSITE,reddit,🐦 社交
   - GEOSITE,facebook,🥽 Meta
