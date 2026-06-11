@@ -2,6 +2,15 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
 
+    const workerVersion = "2026-06-11-a1-a2";
+
+    if (url.pathname === "/_version") {
+      return Response.json({
+        name: "clash-sub",
+        version: workerVersion,
+      });
+    }
+
     if (url.pathname !== "/sub.yaml") {
       return new Response("Not Found", { status: 404 });
     }
@@ -58,6 +67,7 @@ export default {
     newHeaders.set("Cache-Control", "no-store");
     newHeaders.set("Content-Type", "application/x-yaml; charset=utf-8");
     newHeaders.set("X-Sub-Config", configName.toUpperCase());
+    newHeaders.set("X-Worker-Version", workerVersion);
     newHeaders.set(
       "Content-Disposition",
       "inline; filename*=UTF-8''%E8%81%9A%E5%90%88%E4%BC%98%E9%80%89CF%E7%89%88"
