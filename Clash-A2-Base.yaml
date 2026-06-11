@@ -6,15 +6,6 @@ log-level: info
 external-controller: 0.0.0.0:9090
 
 geodata-mode: true
-geodata-loader: memconservative
-geo-auto-update: true
-geo-update-interval: 24
-geox-url:
-  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
-  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
-
 proxies: ~
 proxy-groups: ~
 
@@ -56,7 +47,8 @@ rules:
   - GEOSITE,twitter,🐦 社交
   - GEOSITE,telegram,🐦 社交
   - GEOSITE,instagram,🐦 社交
-  - GEOSITE,reddit,🐦 社交
+  - GEOSITE,telegram,🐦 社交
+  - GEOIP,telegram,🐦 社交,no-resolve
   - GEOSITE,facebook,🥽 Meta
   - GEOSITE,youtube,📺 Youtube
   - GEOSITE,netflix,🎬 Netflix
