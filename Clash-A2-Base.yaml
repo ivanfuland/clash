@@ -53,5 +53,5 @@ rules:
   - GEOSITE,microsoft,📄 Microsoft
   - RULE-SET,Mine1,🌐 国外
   - GEOSITE,geolocation-!cn,🌐 国外
-  - GEOIP,!CN,🌐 国外,no-resolve
+  - GEOIP,!CN,🌐 国外
   - MATCH,🏠 国内
