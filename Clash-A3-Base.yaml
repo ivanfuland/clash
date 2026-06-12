@@ -1,0 +1,63 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+
+geodata-mode: true
+proxies: ~
+proxy-groups: ~
+
+rule-providers:
+  MyAnthropic:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyAnthropic.list
+    path: ./providers/MyAnthropic.yaml
+    interval: 86400
+
+  MyOpenAI:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyOpenAI.list
+    path: ./providers/MyOpenAI.yaml
+    interval: 86400
+
+  Mine1:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Mine1.list
+    path: ./providers/Mine1.yaml
+    interval: 86400
+
+rules:
+  - GEOSITE,category-ads,REJECT
+  - RULE-SET,MyAnthropic,👽 Anthropic
+  - GEOSITE,anthropic,👽 Anthropic
+  - RULE-SET,MyOpenAI,🤖 OpenAI
+  - GEOSITE,openai,🤖 OpenAI
+  - GEOSITE,github,💻 编程
+  - GEOSITE,docker,💻 编程
+  - GEOSITE,npmjs,💻 编程
+  - GEOSITE,python,💻 编程
+  - GEOSITE,twitter,🐦 社交
+  - GEOSITE,instagram,🐦 社交
+  - GEOSITE,facebook,🥽 Meta
+  - GEOSITE,youtube,📺 Youtube
+  - GEOSITE,netflix,🎬 Netflix
+  - GEOSITE,google,🔍 Google
+  - GEOSITE,microsoft,📄 Microsoft
+  - RULE-SET,Mine1,🌐 国外
+  - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve
+  - IP-CIDR,172.16.0.0/12,🏠 国内,no-resolve
+  - IP-CIDR,192.168.0.0/16,🏠 国内,no-resolve
+  - IP-CIDR,127.0.0.0/8,🏠 国内,no-resolve
+  - IP-CIDR,169.254.0.0/16,🏠 国内,no-resolve
+  - IP-CIDR,100.64.0.0/10,🏠 国内,no-resolve
+  - GEOSITE,cn,🏠 国内
+  - GEOIP,CN,🏠 国内,no-resolve
+  - MATCH,🌐 国外
