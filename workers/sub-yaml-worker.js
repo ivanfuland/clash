@@ -1,5 +1,10 @@
-const WORKER_VERSION = "2026-06-12-a1-a2-a3-cache";
+const WORKER_VERSION = "2026-06-12-a1-a2-a3-display-name";
 const CACHE_TTL_SECONDS = 3600;
+const DISPLAY_NAMES = {
+  a1: "聚合优选-兼容版",
+  a2: "聚合优选-黑名单",
+  a3: "聚合优选-白名单",
+};
 
 function normalizeConfig(text) {
   if (/^external-controller:.*$/m.test(text)) {
@@ -22,18 +27,28 @@ function isValidSubscription(text) {
   );
 }
 
+function displayNameFor(configName) {
+  return DISPLAY_NAMES[configName] || `聚合优选-${configName.toUpperCase()}`;
+}
+
+function applyConfigHeaders(headers, configName, cacheStatus) {
+  const displayName = displayNameFor(configName);
+  headers.set("X-Sub-Config", configName.toUpperCase());
+  headers.set("X-Sub-Name", displayName);
+  headers.set("X-Worker-Version", WORKER_VERSION);
+  headers.set("X-Sub-Cache", cacheStatus);
+  headers.set(
+    "Content-Disposition",
+    `inline; filename*=UTF-8''${encodeURIComponent(displayName)}`
+  );
+}
+
 function buildHeaders(sourceHeaders, configName, cacheStatus) {
   const headers = new Headers();
   headers.set("Access-Control-Allow-Origin", "*");
   headers.set("Cache-Control", "no-store");
   headers.set("Content-Type", "application/x-yaml; charset=utf-8");
-  headers.set("X-Sub-Config", configName.toUpperCase());
-  headers.set("X-Worker-Version", WORKER_VERSION);
-  headers.set("X-Sub-Cache", cacheStatus);
-  headers.set(
-    "Content-Disposition",
-    "inline; filename*=UTF-8''%E8%81%9A%E5%90%88%E4%BC%98%E9%80%89CF%E7%89%88"
-  );
+  applyConfigHeaders(headers, configName, cacheStatus);
 
   const userInfo = sourceHeaders?.get("subscription-userinfo");
   if (userInfo) {
@@ -46,9 +61,7 @@ function buildHeaders(sourceHeaders, configName, cacheStatus) {
 function staleResponse(cached, configName) {
   const headers = new Headers(cached.headers);
   headers.set("Cache-Control", "no-store");
-  headers.set("X-Sub-Config", configName.toUpperCase());
-  headers.set("X-Worker-Version", WORKER_VERSION);
-  headers.set("X-Sub-Cache", "STALE");
+  applyConfigHeaders(headers, configName, "STALE");
   return new Response(cached.body, { status: 200, headers });
 }
 
