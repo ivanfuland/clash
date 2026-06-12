@@ -34,6 +34,15 @@ rule-providers:
     path: ./providers/Mine1.yaml
     interval: 86400
 
+  Futu:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyFutu.list
+    path: ./providers/Futu.yaml
+    interval: 86400
+
+
 rules:
   - GEOSITE,category-ads,REJECT
   - RULE-SET,MyAnthropic,👽 Anthropic
@@ -52,6 +61,7 @@ rules:
   - GEOSITE,google,🔍 Google
   - GEOSITE,microsoft,📄 Microsoft
   - RULE-SET,Mine1,🌐 国外
+  - RULE-SET,Futu,🌐 国外
   - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve
   - IP-CIDR,172.16.0.0/12,🏠 国内,no-resolve
   - IP-CIDR,192.168.0.0/16,🏠 国内,no-resolve
