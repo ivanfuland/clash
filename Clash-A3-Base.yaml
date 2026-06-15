@@ -55,13 +55,13 @@ rules:
   - GEOSITE,python,💻 编程
   - GEOSITE,twitter,🐦 社交
   - GEOSITE,instagram,🐦 社交
+  - RULE-SET,Futu,💰 投资
   - GEOSITE,facebook,🥽 Meta
   - GEOSITE,youtube,📺 Youtube
   - GEOSITE,netflix,🎬 Netflix
   - GEOSITE,google,🔍 Google
   - GEOSITE,microsoft,📄 Microsoft
   - RULE-SET,Mine1,🌐 国外
-  - RULE-SET,Futu,🌐 国外
   - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve
   - IP-CIDR,172.16.0.0/12,🏠 国内,no-resolve
   - IP-CIDR,192.168.0.0/16,🏠 国内,no-resolve
