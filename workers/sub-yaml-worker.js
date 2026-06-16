@@ -1,9 +1,10 @@
-const WORKER_VERSION = "2026-06-12-a1-a2-a3-display-name";
+const WORKER_VERSION = "2026-06-16-a1-a4-travel-mode";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a1: "聚合优选-兼容版",
   a2: "聚合优选-黑名单",
   a3: "聚合优选-白名单",
+  a4: "聚合优选-梯子版",
 };
 
 function normalizeConfig(text) {
@@ -88,6 +89,7 @@ export default {
       a1: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A1.ini",
       a2: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A2.ini",
       a3: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A3.ini",
+      a4: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A4.ini",
     };
 
     const rawConfig =
@@ -97,6 +99,7 @@ export default {
       (url.searchParams.has("a1") ? "a1" : "") ||
       (url.searchParams.has("a2") ? "a2" : "") ||
       (url.searchParams.has("a3") ? "a3" : "") ||
+      (url.searchParams.has("a4") ? "a4" : "") ||
       "a2";
 
     const configName = rawConfig
@@ -105,7 +108,7 @@ export default {
       .replace(/\.ini$/, "");
 
     if (!configMap[configName]) {
-      return new Response("Bad Request: config must be A1, A2 or A3", { status: 400 });
+      return new Response("Bad Request: config must be A1, A2, A3 or A4", { status: 400 });
     }
 
     const target = new URL("http://converter.judyplan.com:25500/sub");
