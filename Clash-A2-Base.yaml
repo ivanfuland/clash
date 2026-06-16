@@ -28,6 +28,7 @@ dns:
     - ntp.*.com
     - "+.market.xiaomi.com"
     - "+.ts.net"
+    - geosite:cn
 
 geodata-mode: true
 proxies: ~
