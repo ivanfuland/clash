@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-06-16-a1-a4-travel-mode";
+const WORKER_VERSION = "2026-06-16-a4-config-cache-bust";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a1: "聚合优选-兼容版",
@@ -86,10 +86,10 @@ export default {
     }
 
     const configMap = {
-      a1: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A1.ini",
-      a2: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A2.ini",
-      a3: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A3.ini",
-      a4: "https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A4.ini",
+      a1: `https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A1.ini?v=${WORKER_VERSION}`,
+      a2: `https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A2.ini?v=${WORKER_VERSION}`,
+      a3: `https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A3.ini?v=${WORKER_VERSION}`,
+      a4: `https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/Clash-A4.ini?v=${WORKER_VERSION}`,
     };
 
     const rawConfig =
