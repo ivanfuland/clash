@@ -81,12 +81,13 @@ rules:
   - GEOSITE,google,🔍 Google
   - GEOSITE,microsoft,📄 Microsoft
   - RULE-SET,Mine1,🌐 国外
-  - GEOSITE,geolocation-!cn,🌐 国外
+  - DOMAIN-SUFFIX,ts.net,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve
   - IP-CIDR,172.16.0.0/12,🏠 国内,no-resolve
   - IP-CIDR,192.168.0.0/16,🏠 国内,no-resolve
   - IP-CIDR,127.0.0.0/8,🏠 国内,no-resolve
   - IP-CIDR,169.254.0.0/16,🏠 国内,no-resolve
-  - IP-CIDR,100.64.0.0/10,🏠 国内,no-resolve
+  - GEOSITE,geolocation-!cn,🌐 国外
   - AND,((IP-CIDR,0.0.0.0/0,no-resolve),(NOT,((GEOIP,CN,no-resolve)))),🌐 国外
   - MATCH,🏠 国内
