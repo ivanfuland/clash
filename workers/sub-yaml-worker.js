@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-06-16-fakeip-cn";
+const WORKER_VERSION = "2026-06-16-fakeip-cn-base";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a1: "聚合优选-兼容版",
