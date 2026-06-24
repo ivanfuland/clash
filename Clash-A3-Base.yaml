@@ -95,4 +95,4 @@ rules:
   - IP-CIDR,169.254.0.0/16,🏠 国内,no-resolve
   - GEOSITE,cn,🏠 国内
   - GEOIP,CN,🏠 国内,no-resolve
-  - MATCH,🌐 国外
+  - MATCH,🩳 托底
