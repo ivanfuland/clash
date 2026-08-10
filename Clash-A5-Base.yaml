@@ -1,0 +1,97 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver-policy:
+    "+.ts.net": 100.100.100.100
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "*.localdomain"
+    - "*.home.arpa"
+    - time.*.com
+    - ntp.*.com
+    - "+.market.xiaomi.com"
+    - "+.ts.net"
+    - geosite:cn
+
+geodata-mode: true
+proxies: ~
+proxy-groups: ~
+
+rule-providers:
+  MyAnthropic:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyAnthropic.list
+    path: ./providers/MyAnthropic.yaml
+    interval: 86400
+
+  MyOpenAI:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyOpenAI.list
+    path: ./providers/MyOpenAI.yaml
+    interval: 86400
+
+  Mine1:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Mine1.list
+    path: ./providers/Mine1.yaml
+    interval: 86400
+
+  Futu:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/MyFutu.list
+    path: ./providers/Futu.yaml
+    interval: 86400
+
+rules:
+  - GEOSITE,category-ads,REJECT
+  - RULE-SET,MyAnthropic,🌐 国外
+  - GEOSITE,anthropic,🌐 国外
+  - RULE-SET,MyOpenAI,🌐 国外
+  - GEOSITE,openai,🌐 国外
+  - GEOSITE,github,🌐 国外
+  - GEOSITE,docker,🌐 国外
+  - GEOSITE,npmjs,🌐 国外
+  - GEOSITE,python,🌐 国外
+  - GEOSITE,twitter,🌐 国外
+  - GEOSITE,instagram,🌐 国外
+  - RULE-SET,Futu,🌐 国外
+  - GEOSITE,facebook,🌐 国外
+  - GEOSITE,youtube,🌐 国外
+  - GEOSITE,netflix,🌐 国外
+  - GEOSITE,google,🌐 国外
+  - GEOSITE,microsoft,🌐 国外
+  - RULE-SET,Mine1,🌐 国外
+  - DOMAIN-SUFFIX,ts.net,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve
+  - IP-CIDR,172.16.0.0/12,🏠 国内,no-resolve
+  - IP-CIDR,192.168.0.0/16,🏠 国内,no-resolve
+  - IP-CIDR,127.0.0.0/8,🏠 国内,no-resolve
+  - IP-CIDR,169.254.0.0/16,🏠 国内,no-resolve
+  - GEOSITE,geolocation-!cn,🌐 国外
+  - AND,((IP-CIDR,0.0.0.0/0,no-resolve),(NOT,((GEOIP,CN,no-resolve)))),🌐 国外
+  - MATCH,🏠 国内

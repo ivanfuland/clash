@@ -1,10 +1,11 @@
-const WORKER_VERSION = "2026-06-16-fakeip-cn-base";
+const WORKER_VERSION = "2026-08-10-a5-simple";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a1: "聚合优选-兼容版",
   a2: "聚合优选-黑名单",
   a3: "聚合优选-白名单",
   a4: "聚合优选-梯子版",
+  a5: "聚合优选-简化版",
 };
 
 function normalizeConfig(text) {
@@ -90,6 +91,7 @@ export default {
       a2: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A2.ini?v=${WORKER_VERSION}`,
       a3: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A3.ini?v=${WORKER_VERSION}`,
       a4: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A4.ini?v=${WORKER_VERSION}`,
+      a5: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A5.ini?v=${WORKER_VERSION}`,
     };
 
     const rawConfig =
@@ -100,6 +102,7 @@ export default {
       (url.searchParams.has("a2") ? "a2" : "") ||
       (url.searchParams.has("a3") ? "a3" : "") ||
       (url.searchParams.has("a4") ? "a4" : "") ||
+      (url.searchParams.has("a5") ? "a5" : "") ||
       "a2";
 
     const configName = rawConfig
@@ -108,7 +111,7 @@ export default {
       .replace(/\.ini$/, "");
 
     if (!configMap[configName]) {
-      return new Response("Bad Request: config must be A1, A2, A3 or A4", { status: 400 });
+      return new Response("Bad Request: config must be A1, A2, A3, A4 or A5", { status: 400 });
     }
 
     const target = new URL("http://converter.judyplan.com:25500/sub");
