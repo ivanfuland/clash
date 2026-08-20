@@ -1,6 +1,5 @@
 # 自定义
 DOMAIN-SUFFIX,judyplan.com
-DOMAIN-SUFFIX,browser-use.com
 
 # Perplexity
 DOMAIN-SUFFIX,perplexity.ai
@@ -9,9 +8,12 @@ DOMAIN-SUFFIX,pplx.ai
 # OpenRouter
 # DOMAIN-SUFFIX,openrouter.ai
 
-# 其他
-DOMAIN-SUFFIX,fal.ai
+# Talk君
+DOMAIN-SUFFIX,onelink.me
 
+# 其他
+DOMAIN-SUFFIX,browser-use.com
+DOMAIN-SUFFIX,fal.ai
 DOMAIN-SUFFIX,apify.com
 DOMAIN-SUFFIX,deepwiki.com
 DOMAIN-SUFFIX,langfuse.com
