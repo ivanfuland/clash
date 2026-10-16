@@ -1,0 +1,10 @@
+# 路由器侧 Tailscale 兜底（OpenClash 自定义规则，非共用基底）
+#
+# 作用：当 nft 放行规则丢失时（例如 OpenClash 重启后钩子未生效），
+#       防止本机 tailscaled 的 UDP 漏到节点——漏到节点会把对外端点
+#       改写成节点地址，打洞失败并退到 DERP。
+#
+# 预期命中数恒为 0：nft 放行规则在位时，包在 nft 就 return 了，到不了 mihomo。
+#                   命中数为 0 不是失效信号。
+# 源地址按实际环境修改。
+AND,((SRC-IP-CIDR,192.168.2.50/32,no-resolve),(SRC-PORT,41641),(NETWORK,udp)),DIRECT

@@ -29,6 +29,24 @@ Clash 层的 `AND,((SRC-PORT,41641),(NETWORK,udp)),DIRECT` **确实会命中**
 因此该规则**已从规则基底移除**：规则基底是全客户端公用的（路由器、Windows、移动端），
 而这段只在"路由器后面那台跑 Tailscale 的机器"上成立。
 
+## 两层结构
+
+| 层 | 落点 | 角色 | 失效后果 |
+|---|---|---|---|
+| nft 放行 | `openclash-tailscale-udp-bypass.sh` → 路由器 `/etc/openclash/custom/openclash_custom_firewall_rules.sh` | **保证层**：包不进 tproxy，保住源端口 41641 | 规则丢失则漏进 tproxy，端点被改写 |
+| Clash 自定义规则 | `openclash-tailscale-udp-bypass.custom-rules.list` → 路由器 OpenClash 的"自定义规则" | **兜底层**：nft 层丢失时不让这条流漏到节点 | 无（nft 在位时它是死规则） |
+
+### 兜底层为什么放路由器侧，而不是 rules 基底
+
+    AND,((SRC-IP-CIDR,192.168.2.50/32,no-resolve),(SRC-PORT,41641),(NETWORK,udp)),DIRECT
+
+`Clash-A*-Base.yaml` 是全客户端共用的（路由器、Windows、移动端），
+而这条只在"路由器后面那台跑 Tailscale 的机器"上有意义。
+放共用基底里既污染其它客户端，又表达不了这层专属关系。
+
+**预期行为：nft 放行规则在位时，这条的命中数恒为 0**
+（包在 nft 就 `return` 了，根本到不了 mihomo）。命中数为 0 **不是**失效信号。
+
 ## 生效方式
 
 把 `openclash-tailscale-udp-bypass.sh` 的内容追加到路由器上的
@@ -43,6 +61,7 @@ OpenClash 每次启动会执行该钩子（启动日志显示 `Start Add Custom 
 | A 直连 | `tailscale ping <对端>` 输出不含 `DERP`，延迟为 ms 级 |
 | B 固定端口 | 同一行里的端口等于 41641；`endpoints changed` 只收敛到 `<家宽IP>:41641`，不再累积随机端口 |
 | 持久化 | 重启一次 OpenClash 后规则仍在（`nft list chain inet fw4 openclash_mangle \| grep 41641`） |
+| 兜底层存在 | 路由器生效配置里能搜到那条 `AND` 规则（查"存在性"，不要看命中数） |
 
 只看 A 会漏判：2026-10-16 上午 A 一直正常，而 B 已经在退化。
 
