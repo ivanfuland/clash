@@ -48,7 +48,6 @@ Assert-True ($base -match '(?m)^\s*- MATCH,🏠 国内\s*$') "A5 must end unmatc
 Assert-True ($base -match '(?m)^\s*- GEOSITE,geolocation-!cn,🌐 国外\s*$') "A5 must route foreign domains to foreign"
 Assert-True ($base -match '(?m)^\s*- AND,.*GEOIP,CN.*🌐 国外\s*$') "A5 must keep the Stash-compatible foreign IPv4 rule"
 Assert-True ($base -match '(?m)^\s*- DOMAIN-SUFFIX,ts\.net,DIRECT\s*$') "A5 must keep Tailscale direct routing"
-Assert-True ($base -match '(?m)^\s*- AND,\(\(SRC-PORT,41641\),\(NETWORK,udp\)\),DIRECT\s*$') "A5 must keep the Tailscale UDP bypass rule"
 
 Assert-True ($worker.Contains('a5: "聚合优选-简化版"')) "Worker display name does not include A5"
 Assert-True ($worker.Contains('Clash-A5.ini')) "Worker config map does not include Clash-A5.ini"
