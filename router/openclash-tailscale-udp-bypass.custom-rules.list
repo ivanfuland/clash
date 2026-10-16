@@ -6,5 +6,10 @@
 #
 # 预期命中数恒为 0：nft 放行规则在位时，包在 nft 就 return 了，到不了 mihomo。
 #                   命中数为 0 不是失效信号。
+# 落点与开关（设备实测，详见同目录 .md）：
+#   1) 需要 enable_custom_clash_rules=1 才生效，而该开关是共用的，会连带激活 (Priority) 那份文件；
+#      若那份是完整规则集（末尾 MATCH,🌐 国外），整体前置会吃掉后面的规则。
+#   2) 本规则必须落在顶部区域（订阅里 AND,((IP-CIDR,0.0.0.0/0),(NOT,GEOIP,CN)) → 🌐 国外 那条之前）。
+#      不要放在 (Extended)/bottom，那个位置永远轮不到命中。
 # 源地址按实际环境修改。
 AND,((SRC-IP-CIDR,192.168.2.50/32,no-resolve),(SRC-PORT,41641),(NETWORK,udp)),DIRECT
