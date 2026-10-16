@@ -1,7 +1,6 @@
-const WORKER_VERSION = "2026-08-10-a5-simple";
+const WORKER_VERSION = "2026-10-16-tailscale-udp-bypass";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
-  a1: "聚合优选-兼容版",
   a2: "聚合优选-黑名单",
   a3: "聚合优选-白名单",
   a4: "聚合优选-梯子版",
@@ -87,7 +86,6 @@ export default {
     }
 
     const configMap = {
-      a1: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A1.ini?v=${WORKER_VERSION}`,
       a2: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A2.ini?v=${WORKER_VERSION}`,
       a3: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A3.ini?v=${WORKER_VERSION}`,
       a4: `https://raw.githubusercontent.com/ivanfuland/clash/main/Clash-A4.ini?v=${WORKER_VERSION}`,
@@ -98,7 +96,6 @@ export default {
       url.searchParams.get("config") ||
       url.searchParams.get("profile") ||
       url.searchParams.get("rule") ||
-      (url.searchParams.has("a1") ? "a1" : "") ||
       (url.searchParams.has("a2") ? "a2" : "") ||
       (url.searchParams.has("a3") ? "a3" : "") ||
       (url.searchParams.has("a4") ? "a4" : "") ||
@@ -110,8 +107,12 @@ export default {
       .replace(/^clash-/, "")
       .replace(/\.ini$/, "");
 
+    if (configName === "a1") {
+      return new Response("A1 has been retired; use A2, A3, A4 or A5", { status: 410 });
+    }
+
     if (!configMap[configName]) {
-      return new Response("Bad Request: config must be A1, A2, A3, A4 or A5", { status: 400 });
+      return new Response("Bad Request: config must be A2, A3, A4 or A5", { status: 400 });
     }
 
     const target = new URL("http://converter.judyplan.com:25500/sub");

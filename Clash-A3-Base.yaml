@@ -88,6 +88,9 @@ rules:
   - RULE-SET,Mine1,🌐 国外
   - DOMAIN-SUFFIX,ts.net,DIRECT
   - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  # 本机自己发起的 Tailscale UDP 探测/打洞必须直连：被 tproxy 接走后公网端点会变成节点地址，打洞失败退到 DERP。
+  # 这是一类问题（P2P/VPN 打洞），Tailscale 是首例；同类按同样形状加，不要写成 tailscale 专用规则。
+  - AND,((SRC-PORT,41641),(NETWORK,udp)),DIRECT
   - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve
   - IP-CIDR,172.16.0.0/12,🏠 国内,no-resolve
   - IP-CIDR,192.168.0.0/16,🏠 国内,no-resolve

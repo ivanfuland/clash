@@ -48,10 +48,12 @@ Assert-True ($base -match '(?m)^\s*- MATCH,🏠 国内\s*$') "A5 must end unmatc
 Assert-True ($base -match '(?m)^\s*- GEOSITE,geolocation-!cn,🌐 国外\s*$') "A5 must route foreign domains to foreign"
 Assert-True ($base -match '(?m)^\s*- AND,.*GEOIP,CN.*🌐 国外\s*$') "A5 must keep the Stash-compatible foreign IPv4 rule"
 Assert-True ($base -match '(?m)^\s*- DOMAIN-SUFFIX,ts\.net,DIRECT\s*$') "A5 must keep Tailscale direct routing"
+Assert-True ($base -match '(?m)^\s*- AND,\(\(SRC-PORT,41641\),\(NETWORK,udp\)\),DIRECT\s*$') "A5 must keep the Tailscale UDP bypass rule"
 
 Assert-True ($worker.Contains('a5: "聚合优选-简化版"')) "Worker display name does not include A5"
 Assert-True ($worker.Contains('Clash-A5.ini')) "Worker config map does not include Clash-A5.ini"
 Assert-True ($worker.Contains('url.searchParams.has("a5")')) "Worker short parameter handling does not include A5"
-Assert-True ($worker.Contains('A1, A2, A3, A4 or A5')) "Worker validation message does not include A5"
+Assert-True ($worker.Contains('A2, A3, A4 or A5')) "Worker validation message does not include A5"
+Assert-True (-not $worker.Contains('Clash-A1.ini')) "A1 has been retired and must not be referenced"
 
 Write-Host "A5 configuration checks passed"
