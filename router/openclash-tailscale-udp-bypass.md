@@ -54,6 +54,27 @@ Clash 层的 `AND,((SRC-PORT,41641),(NETWORK,udp)),DIRECT` **确实会命中**
 OpenClash 每次启动会执行该钩子（启动日志显示 `Start Add Custom Firewall Rules`），
 写进去之后规则不再是一次性的。
 
+## 自定义规则落点（2026-10-16 设备实测）
+
+兜底层**不是**写进文件就生效，落点与开关都有约束。以下事实从设备上的脚本读出：
+
+| 事实 | 出处 |
+|---|---|
+| `enable_custom_clash_rules` 是**总开关**，默认 0；两个自定义规则文件共用它 | `/usr/lib/lua/luci/model/cbi/openclash/config-overwrite.lua:449` |
+| `custom_rules` → `/etc/openclash/custom/openclash_custom_rules.list`，界面标注 (Priority)，整体前置 | 同文件 :453，`yml_rules_change.sh:135` |
+| `custom_rules_2` → `/etc/openclash/custom/openclash_custom_rules_2.list`，界面标注 (Extended)，插到 `DST-PORT,80/MATCH` 锚点之前 | 同文件 :474，`yml_rules_change.sh:136` |
+
+两条约束：
+
+1. **开关是共用的。** 只写文件不开开关，规则到不了内核；而开开关会**连带激活 (Priority) 那份文件**。若那份文件是完整规则集（末尾 `MATCH,🌐 国外`），它会整体前置到订阅规则之前，把后面的规则全部吃掉——等于换掉整套路由。**不要在不确定其内容的情况下打开这个开关。**
+2. **bottom 位置对本用途无效。** 本规则要拦的是"目的为公网 IP 的 UDP"，在订阅规则里 `AND,((IP-CIDR,0.0.0.0/0,no-resolve),(NOT,((GEOIP,CN,no-resolve)))),🌐 国外` 会先命中并把它送到节点；插在底部的规则永远轮不到。**本规则必须落在该条之前（顶部区域）。**
+
+推荐顺序：
+
+1. **首选：先把 nft 钩子写好**（`openclash-tailscale-udp-bypass.sh`）。这才是根治——钩子生效后，"nft 规则被重启抹掉"这个失效场景基本消失，兜底层的必要性随之下降。
+2. 若仍要兜底层：用 OpenClash 的**自定义覆写脚本**钩子（启动日志显示 `Start Running Custom Overwrite Scripts`）在规则表顶部注入，避开共用开关；或把 (Priority) 文件内容先备份、只留本规则，再开开关。
+3. **不要把本规则留在 (Extended) 底部**：那个位置拦不到，会造成"以为有兜底、其实没有"。
+
 ## 验收判据
 
 | 判据 | 期望 |
