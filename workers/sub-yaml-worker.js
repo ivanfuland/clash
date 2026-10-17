@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-10-17-residential-entry";
+const WORKER_VERSION = "2026-10-17-dedicated-line";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a2: "聚合优选-黑名单",
