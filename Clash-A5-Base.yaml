@@ -84,6 +84,7 @@ rules:
   - GEOSITE,netflix,🌐 国外
   - GEOSITE,google,🌐 国外
   - GEOSITE,microsoft,🌐 国外
+  - DOMAIN,sub.judyplan.com,DIRECT   # 订阅地址必须直连
   - RULE-SET,Mine1,🌐 国外
   - DOMAIN-SUFFIX,ts.net,DIRECT
   - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
