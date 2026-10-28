@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-10-28-drop-ip-fallback";
+const WORKER_VERSION = "2026-10-28-controller-local";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a2: "聚合优选-黑名单",
@@ -10,11 +10,11 @@ function normalizeConfig(text) {
   if (/^external-controller:.*$/m.test(text)) {
     return text.replace(
       /^external-controller:.*$/m,
-      "external-controller: 0.0.0.0:9090"
+      "external-controller: 127.0.0.1:9090"
     );
   }
 
-  return `external-controller: 0.0.0.0:9090\n${text}`;
+  return `external-controller: 127.0.0.1:9090\n${text}`;
 }
 
 function isValidSubscription(text) {
