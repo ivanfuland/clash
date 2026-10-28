@@ -50,12 +50,12 @@ rule-providers:
     path: ./providers/MyOpenAI.yaml
     interval: 86400
 
-  Mine1:
+  Mine:
     type: http
     behavior: classical
     format: text
-    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Mine1.list
-    path: ./providers/Mine1.yaml
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/Mine.list
+    path: ./providers/Mine.yaml
     interval: 86400
 
   Futu:
@@ -85,7 +85,7 @@ rules:
   - GEOSITE,google,🔍 Google
   - GEOSITE,microsoft,📄 Microsoft
   - DOMAIN,sub.judyplan.com,DIRECT   # 订阅地址必须直连
-  - RULE-SET,Mine1,🌐 国外
+  - RULE-SET,Mine,🌐 国外
   - DOMAIN-SUFFIX,ts.net,DIRECT
   - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,🏠 国内,no-resolve

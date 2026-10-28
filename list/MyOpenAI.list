@@ -1,5 +1,5 @@
 # NAME: OpenAI Combined Rules
-# UPDATED: 2026-04-17
+# UPDATED: 2026-10-28
 # 包含了基础域名、CDN、语音服务及必要的第三方依赖
 
 # --- Main Domains (核心域名) ---
@@ -47,6 +47,11 @@ DOMAIN-SUFFIX,launchdarkly.com
 DOMAIN-SUFFIX,statsig.com
 DOMAIN-SUFFIX,events.statsigapi.net
 DOMAIN-SUFFIX,featuregates.org
+
+# --- Perplexity / OpenRouter ---
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+# DOMAIN-SUFFIX,openrouter.ai
 
 # --- Network Blocks (IP段) ---
 IP-CIDR,24.199.123.28/32,no-resolve
