@@ -94,5 +94,4 @@ rules:
   - IP-CIDR,127.0.0.0/8,🏠 国内,no-resolve
   - IP-CIDR,169.254.0.0/16,🏠 国内,no-resolve
   - GEOSITE,geolocation-!cn,🌐 国外
-  - AND,((IP-CIDR,0.0.0.0/0,no-resolve),(NOT,((GEOIP,CN,no-resolve)))),🌐 国外
   - MATCH,🏠 国内

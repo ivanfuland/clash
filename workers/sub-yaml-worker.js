@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-10-28-drop-a5-merge-mine";
+const WORKER_VERSION = "2026-10-28-drop-ip-fallback";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a2: "聚合优选-黑名单",
