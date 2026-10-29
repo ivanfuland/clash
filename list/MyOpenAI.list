@@ -51,7 +51,7 @@ DOMAIN-SUFFIX,featuregates.org
 # --- Perplexity / OpenRouter ---
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,pplx.ai
-# DOMAIN-SUFFIX,openrouter.ai
+DOMAIN-SUFFIX,openrouter.ai
 
 # --- Network Blocks (IP段) ---
 IP-CIDR,24.199.123.28/32,no-resolve
