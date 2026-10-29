@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-10-28-controller-local";
+const WORKER_VERSION = "2026-10-29-ai-domain";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a2: "聚合优选-黑名单",
