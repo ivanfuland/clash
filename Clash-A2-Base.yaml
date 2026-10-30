@@ -74,6 +74,14 @@ rule-providers:
     path: ./providers/Futu.yaml
     interval: 86400
 
+  Peach:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/ivanfuland/clash/refs/heads/main/list/peach.list
+    path: ./providers/Peach.yaml
+    interval: 86400
+
 rules:
   - GEOSITE,category-ads,REJECT
   - RULE-SET,MyAnthropic,👽 Anthropic
@@ -87,6 +95,7 @@ rules:
   - GEOSITE,twitter,🐦 社交
   - GEOSITE,instagram,🐦 社交
   - RULE-SET,Futu,💰 投资
+  - RULE-SET,Peach,🌐 国外
   - GEOSITE,facebook,🥽 Meta
   - GEOSITE,youtube,📺 Youtube
   - GEOSITE,netflix,🎬 Netflix

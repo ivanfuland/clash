@@ -1,0 +1,34 @@
+# NAME: Peach Sources
+# UPDATED: 2026-10-30
+# Peach 应用的采集与关注来源。只影响 Peach 自己的流量，不覆盖通用站点。
+
+# --- JAV 资料采集 ---
+DOMAIN-SUFFIX,javdb.com
+DOMAIN-SUFFIX,jdbstatic.com
+DOMAIN-SUFFIX,jdforrepam.com
+DOMAIN,catembylegacy.fastcdn.dpdns.org
+DOMAIN-SUFFIX,javbus.com
+DOMAIN-SUFFIX,avbase.net
+DOMAIN-SUFFIX,dmm.co.jp
+DOMAIN-SUFFIX,fc2.com
+DOMAIN-SUFFIX,fc2cmadb.com
+DOMAIN-SUFFIX,fc2ppv-db.com
+DOMAIN-SUFFIX,javarchive.com
+DOMAIN-SUFFIX,javten.com
+DOMAIN-SUFFIX,1pondo.tv
+DOMAIN-SUFFIX,r18.dev
+DOMAIN-SUFFIX,seesaawiki.jp
+DOMAIN-SUFFIX,k-mib.com
+DOMAIN-SUFFIX,avwikidb.com
+
+# --- 关注与发现 ---
+DOMAIN-SUFFIX,f95zone.to
+DOMAIN-SUFFIX,fanbox.cc
+DOMAIN-SUFFIX,gofile.io
+DOMAIN-SUFFIX,iwara.tv
+DOMAIN-SUFFIX,rule34.xxx
+DOMAIN-SUFFIX,rule34.paheal.net
+DOMAIN-SUFFIX,rule34video.com
+DOMAIN-SUFFIX,pixeldrain.com
+DOMAIN-SUFFIX,simpcity.cr
+DOMAIN-SUFFIX,subscribestar.adult
