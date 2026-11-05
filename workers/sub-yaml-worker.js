@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-11-05-reality-stable";
+const WORKER_VERSION = "2026-11-05-cache-key-osaka-cleanup";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a2: "聚合优选-黑名单",
@@ -124,7 +124,9 @@ export default {
     target.searchParams.set("new_name", "true");
 
     const cache = caches.default;
-    const cacheKey = new Request(`${url.origin}${url.pathname}?config=${configName}`);
+    const cacheKey = new Request(
+      `${url.origin}${url.pathname}?config=${configName}&v=${WORKER_VERSION}`
+    );
     const cached = await cache.match(cacheKey);
 
     let response;
