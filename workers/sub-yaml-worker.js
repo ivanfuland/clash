@@ -1,4 +1,4 @@
-const WORKER_VERSION = "2026-11-22-fix-substore-target-clashmeta";
+const WORKER_VERSION = "2026-11-24-cn-mrs-and-gemini-google";
 const CACHE_TTL_SECONDS = 3600;
 const DISPLAY_NAMES = {
   a2: "聚合优选-黑名单",

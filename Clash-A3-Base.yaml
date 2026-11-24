@@ -27,13 +27,21 @@ dns:
     - ntp.*.com
     - "+.market.xiaomi.com"
     - "+.ts.net"
-    - geosite:cn
+    - rule-set:CnDomain
 
 geodata-mode: true
 proxies: ~
 proxy-groups: ~
 
 rule-providers:
+  CnDomain:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.mrs
+    path: ./providers/CnDomain.mrs
+    interval: 86400
+
   MyAnthropic:
     type: http
     behavior: classical
